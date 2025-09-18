@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyHIGH Shoes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+    font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+    margin: 0;
+    background: #fff;
+    color: #222;
+}
+header, nav {
+    background: #21243d;
+    color: #fff;
+}
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 2rem;
+}
+.logo {
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.logo span {
+    color: #fa5446;
+}
+nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+nav ul li a:hover {
+    color: #fa5446;
+}
+.cta-btn {
+    background: #fa5446;
+    color: #fff;
+    border: none;
+    padding: 0.7rem 2rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.cta-btn:hover {
+    background: #e53a2f;
+}
+.hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 3rem 2rem 2rem 2rem;
+    background: linear-gradient(96deg, #f7f8fc 70%, #fa5446 110%);
+    min-height: 70vh;
+    gap: 3rem;
+}
+.hero-content {
+    flex: 1;
+}
+.hero-content h1 {
+    font-size: 2.5rem;
+}
+.hero-content h1 span {
+    color: #fa5446;
+}
+.hero-img {
+    flex: 1;
+    max-width: 400px;
+    width: 100%;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(250,84,70,0.15);
+}
+.products {
+    padding: 3rem 2rem;
+    background: #f7f8fa;
+}
+.products h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.product-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+.product-card {
+    background: #fff;
+    box-shadow: 0 2px 10px #00000010;
+    border-radius: 1rem;
+    padding: 1rem;
+    width: 220px;
+    text-align: center;
+    transition: box-shadow 0.2s;
+}
+.product-card:hover {
+    box-shadow: 0 8px 24px #fa544620;
+    transform: translateY(-5px) scale(1.02);
+}
+.product-card img {
+    max-width: 100%;
+    border-radius: 0.8rem;
+}
+.product-card h3 {
+    margin: 1rem 0 0.5rem 0;
+}
+.product-card p {
+    color: #fa5446;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+.product-card button {
+    background: #21243d;
+    border: none;
+    color: #fff;
+    padding: 0.5rem 1.5rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.product-card button:hover {
+    background: #fa5446;
+}
+.about {
+    padding: 3rem 2rem;
+    background: #fff;
+    text-align: center;
+}
+.newsletter {
+    background: #fa5446;
+    padding: 2rem 2rem;
+    text-align: center;
+    color: #fff;
+}
+.newsletter h2 {
+    margin-bottom: 0.5rem;
+}
+.newsletter form {
+    display: inline-block;
+    margin-top: 1rem;
+}
+.newsletter input[type="email"] {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 2rem 0 0 2rem;
+    font-size: 1rem;
+    outline: none;
+    width: 220px;
+}
+.newsletter button {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    background: #21243d;
+    color: #fff;
+    border-radius: 0 2rem 2rem 0;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.newsletter button:hover {
+    background: #111328;
+}
+footer {
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding: 1.5rem 1rem 1rem 1rem;
+    font-size: 1rem;
+    letter-spacing: 0.2px;
+}
+footer a {
+    color: #fa5446;
+    text-decoration: none;
+}
+footer a:hover {
+    text-decoration: underline;
+}
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .hero-content {
+        text-align: center;
+    }
+    .hero-img {
+        max-width: 320px;
+    }
+    .product-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+</style>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Fly<span>HIGH</span></div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Shop</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="cta-btn">Shop Now</button>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Step Up with Fly<span>HIGH</span></h1>
+            <p>Unleash your best moves with our latest, trendsetting sneaker collection.</p>
+            <button class="cta-btn">Explore Collection</button>
+        </div>
+        <img src="domino-studio-164_6wVEHfI-unsplash.jpg" class="hero-img" alt="Latest FlyHIGH Sneakers">
+    </section>
+
+    <section id="products" class="products">
+        <h2>Our Bestsellers</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="xavier-teo-SxAXphIPWeg-unsplash.jpg" alt="Sneaker 1">
+                <h3>Lightning Runner</h3>
+                <p>$89</p>
+                <button>Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="maksim-larin-NOpsC3nWTzY-unsplash.jpg" alt="Sneaker 2">
+                <h3>Sky Glide</h3>
+                <p>$99</p>
+                <button>Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="andres-jasso-PqbL_mxmaUE-unsplash.jpg" alt="Sneaker 3">
+                <h3>Urban Star</h3>
+                <p>$109</p>
+                <button>Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <h2>About FlyHIGH</h2>
+        <p>
+            FlyHIGH redefines the art of footwear—blending premium materials, innovative design, and unshakeable comfort.
+            Our mission: Empower self-expression and elevate every stride. Discover why thousands trust FlyHIGH to keep them a step ahead.
+        </p>
+    </section>
+
+    <section id="newsletter" class="newsletter">
+        <h2>Stay in the Loop</h2>
+        <form>
+            <input type="email" placeholder="Your email address" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <footer>
+        <div>Follow us:
+            <a href="#" aria-label="Instagram">Instagram</a> |
+            <a href="#" aria-label="Facebook">Facebook</a> |
+            <a href="#" aria-label="Twitter">Twitter</a>
+        </div>
+        <p>&copy; 2025 FlyHIGH Shoes. All rights reserved.</p>
+    </footer>
+</body>
+</html>
