@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrandCraft | Business Name Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --primary-light: #8A84FF;
+            --secondary: #FF6584;
+            --dark: #2A2D43;
+            --light: #F7F7FF;
+            --gray: #E5E5E5;
+            --success: #4CAF50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--dark);
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-title i {
+            color: var(--primary);
+        }
+        
+        .generator-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        select, input {
+            padding: 14px;
+            border: 2px solid var(--gray);
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s;
+        }
+        
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .btn {
+            padding: 14px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background: #FF7B95;
+        }
+        
+        .results {
+            margin-top: 10px;
+        }
+        
+        .name-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .name-item {
+            padding: 15px;
+            background-color: var(--light);
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .name-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .favorite {
+            background-color: #FFF8E1;
+            border-left-color: var(--secondary);
+        }
+        
+        .favorite-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 0;
+            color: #ccc;
+            transition: color 0.3s;
+        }
+        
+        .favorite-btn:hover, .favorite-btn.active {
+            color: gold;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .counter {
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .action-buttons .btn {
+            flex: 1;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: var(--dark);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        .instructions {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .instructions h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">BrandCraft</div>
+            <p class="tagline">Create the perfect business name with our AI-powered generator. Stand out from the competition.</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="card">
+                <h2 class="card-title">
+                    <i>✨</i> Name Generator
+                </h2>
+                
+                <div class="generator-form">
+                    <div class="form-group">
+                        <label for="adjective">Select an Adjective:</label>
+                        <select id="adjective">
+                            <option value="random">Random Adjective</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="shopType">Select Shop Type:</label>
+                        <select id="shopType">
+                            <option value="random">Random Shop Type</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="otherWord">Select Another Word:</label>
+                        <select id="otherWord">
+                            <option value="random">Random Word</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="numNames">Number of Names to Generate:</label>
+                        <input type="number" id="numNames" min="1" max="20" value="8">
+                    </div>
+                    
+                    <button id="generateBtn" class="btn">
+                        <i>🚀</i> Generate Business Names
+                    </button>
+                </div>
+                
+                <div class="instructions">
+                    <h3>How to use:</h3>
+                    <ul>
+                        <li>Select words from each category or choose "Random" for variety</li>
+                        <li>Adjust the number of names you want to generate</li>
+                        <li>Click the generate button to create unique business names</li>
+                        <li>Save your favorites by clicking the star icon</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="section-header">
+                    <h2 class="card-title">
+                        <i>💡</i> Generated Names
+                    </h2>
+                    <div class="counter" id="namesCounter">0</div>
+                </div>
+                
+                <div class="results">
+                    <div id="nameList" class="name-list">
+                        <!-- Names will appear here -->
+                        <div class="name-item empty-state">
+                            Your generated names will appear here
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button id="saveAllBtn" class="btn btn-secondary">
+                            <i>💾</i> Save All
+                        </button>
+                        <button id="copyAllBtn" class="btn">
+                            <i>📋</i> Copy All
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="favoritesSection" class="hidden">
+                    <div class="section-header" style="margin-top: 30px;">
+                        <h2 class="card-title">
+                            <i>⭐</i> Favorite Names
+                        </h2>
+                        <div class="counter" id="favoritesCounter">0</div>
+                    </div>
+                    
+                    <div id="favoritesList" class="name-list">
+                        <!-- Favorite names will appear here -->
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button id="clearFavoritesBtn" class="btn btn-secondary">
+                            <i>🗑️</i> Clear Favorites
+                        </button>
+                        <button id="exportFavoritesBtn" class="btn">
+                            <i>📤</i> Export Favorites
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>BrandCraft Business Name Generator &copy; 2023 | Create memorable business names in seconds</p>
+        </footer>
+    </div>
+
+    <script>
+        // Word banks
+        const adjectives = [
+            "Creative", "Modern", "Vintage", "Urban", "Artisanal", "Luxury", 
+            "Premium", "Elegant", "Rustic", "Contemporary", "Classic", "Innovative",
+            "Dynamic", "Sustainable", "Organic", "Handcrafted", "Boutique", "Elite",
+            "Cozy", "Spacious", "Minimalist", "Vibrant", "Serene", "Pristine",
+            "Authentic", "Distinctive", "Refined", "Polished", "Chic", "Quaint",
+            "Bold", "Serene", "Harmonious", "Timeless", "Distinct", "Pioneering"
+        ];
+        
+        const shopTypes = [
+            "Boutique", "Studio", "Workshop", "Guild", "Emporium", "Market",
+            "Store", "Shop", "Gallery", "Atelier", "Collective", "Company",
+            "Hub", "Spot", "Place", "Corner", "Nook", "Outlet", "Depot",
+            "House", "Lab", "Factory", "Works", "Center", "Exchange", "Loft",
+            "Garage", "Pantry", "Bazaar", "Sanctuary", "Oasis"
+        ];
+        
+        const otherWords = [
+            "Creations", "Designs", "Goods", "Wares", "Collections", "Finds",
+            "Treasures", "Essentials", "Accents", "Elements", "Styles", "Concepts",
+            "Solutions", "Visions", "Expressions", "Craft", "Art", "Works",
+            "Studio", "Craftsmanship", "Quality", "Originals", "Imports", "Exports",
+            "Local", "Global", "Urban", "Rural", "Modern", "Vintage", "Luxe",
+            "Essence", "Vibes", "Co.", "& Co."
+        ];
+
+        // DOM elements
+        const adjectiveSelect = document.getElementById('adjective');
+        const shopTypeSelect = document.getElementById('shopType');
+        const otherWordSelect = document.getElementById('otherWord');
+        const generateBtn = document.getElementById('generateBtn');
+        const nameList = document.getElementById('nameList');
+        const favoritesList = document.getElementById('favoritesList');
+        const favoritesSection = document.getElementById('favoritesSection');
+        const namesCounter = document.getElementById('namesCounter');
+        const favoritesCounter = document.getElementById('favoritesCounter');
+        const saveAllBtn = document.getElementById('saveAllBtn');
+        const copyAllBtn = document.getElementById('copyAllBtn');
+        const clearFavoritesBtn = document.getElementById('clearFavoritesBtn');
+        const exportFavoritesBtn = document.getElementById('exportFavoritesBtn');
+        
+        // Populate dropdowns
+        function populateDropdowns() {
+            // Adjectives
+            adjectives.forEach(adj => {
+                const option = document.createElement('option');
+                option.value = adj;
+                option.textContent = adj;
+                adjectiveSelect.appendChild(option);
+            });
+            
+            // Shop types
+            shopTypes.forEach(type => {
+                const option = document.createElement('option');
+                option.value = type;
+                option.textContent = type;
+                shopTypeSelect.appendChild(option);
+            });
+            
+            // Other words
+            otherWords.forEach(word => {
+                const option = document.createElement('option');
+                option.value = word;
+                option.textContent = word;
+                otherWordSelect.appendChild(option);
+            });
+        }
+        
+        // Generate random business names
+        function generateNames() {
+            const numNames = parseInt(document.getElementById('numNames').value);
+            const selectedAdjective = adjectiveSelect.value;
+            const selectedShopType = shopTypeSelect.value;
+            const selectedOtherWord = otherWordSelect.value;
+            
+            nameList.innerHTML = '';
+            
+            for (let i = 0; i < numNames; i++) {
+                const adjective = selectedAdjective === 'random' 
+                    ? adjectives[Math.floor(Math.random() * adjectives.length)] 
+                    : selectedAdjective;
+                
+                const shopType = selectedShopType === 'random' 
+                    ? shopTypes[Math.floor(Math.random() * shopTypes.length)] 
+                    : selectedShopType;
+                
+                const otherWord = selectedOtherWord === 'random' 
+                    ? otherWords[Math.floor(Math.random() * otherWords.length)] 
+                    : selectedOtherWord;
+                
+                // Create different combinations
+                const combinations = [
+                    `${adjective} ${shopType}`,
+                    `${adjective} ${otherWord} ${shopType}`,
+                    `${shopType} of ${adjective} ${otherWord}`,
+                    `${adjective}'s ${shopType}`,
+                    `${otherWord} ${shopType}`,
+                    `${adjective} ${otherWord}`,
+                    `The ${adjective} ${shopType}`,
+                    `${adjective} & ${otherWord} ${shopType}`
+                ];
+                
+                const name = combinations[Math.floor(Math.random() * combinations.length)];
+                
+                const nameElement = document.createElement('div');
+                nameElement.className = 'name-item';
+                nameElement.innerHTML = `
+                    <span>${name}</span>
+                    <button class="favorite-btn" data-name="${name}">★</button>
+                `;
+                
+                nameList.appendChild(nameElement);
+            }
+            
+            // Update counter
+            namesCounter.textContent = numNames;
+            
+            // Add event listeners to favorite buttons
+            document.querySelectorAll('.favorite-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    toggleFavorite(this.getAttribute('data-name'));
+                    this.classList.toggle('active');
+                });
+            });
+        }
+        
+        // Toggle favorite status of a name
+        function toggleFavorite(name) {
+            let favorites = JSON.parse(localStorage.getItem('businessNameFavorites')) || [];
+            
+            if (favorites.includes(name)) {
+                favorites = favorites.filter(fav => fav !== name);
+            } else {
+                favorites.push(name);
+            }
+            
+            localStorage.setItem('businessNameFavorites', JSON.stringify(favorites));
+            displayFavorites();
+        }
+        
+        // Display favorite names
+        function displayFavorites() {
+            const favorites = JSON.parse(localStorage.getItem('businessNameFavorites')) || [];
+            
+            if (favorites.length > 0) {
+                favoritesSection.classList.remove('hidden');
+                favoritesList.innerHTML = '';
+                
+                favorites.forEach(name => {
+                    const favElement = document.createElement('div');
+                    favElement.className = 'name-item favorite';
+                    favElement.innerHTML = `
+                        <span>${name}</span>
+                        <button class="favorite-btn active" data-name="${name}">★</button>
+                    `;
+                    favoritesList.appendChild(favElement);
+                });
+                
+                // Update counter
+                favoritesCounter.textContent = favorites.length;
+                
+                // Add event listeners to favorite buttons in favorites list
+                favoritesList.querySelectorAll('.favorite-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        toggleFavorite(this.getAttribute('data-name'));
+                    });
+                });
+            } else {
+                favoritesSection.classList.add('hidden');
+            }
+        }
+        
+        // Save all generated names to favorites
+        function saveAllNames() {
+            const nameItems = document.querySelectorAll('#nameList .name-item:not(.empty-state)');
+            let favorites = JSON.parse(localStorage.getItem('businessNameFavorites')) || [];
+            
+            nameItems.forEach(item => {
+                const name = item.querySelector('span').textContent;
+                if (!favorites.includes(name)) {
+                    favorites.push(name);
+                }
+            });
+            
+            localStorage.setItem('businessNameFavorites', JSON.stringify(favorites));
+            displayFavorites();
+            
+            // Show confirmation
+            alert(`${nameItems.length} names added to favorites!`);
+        }
+        
+        // Copy all generated names to clipboard
+        function copyAllNames() {
+            const nameItems = document.querySelectorAll('#nameList .name-item:not(.empty-state)');
+            const names = Array.from(nameItems).map(item => item.querySelector('span').textContent);
+            
+            if (names.length === 0) {
+                alert('No names to copy! Generate some names first.');
+                return;
+            }
+            
+            const textToCopy = names.join('\n');
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert(`${names.length} names copied to clipboard!`);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                alert('Failed to copy names to clipboard.');
+            });
+        }
+        
+        // Clear all favorites
+        function clearFavorites() {
+            if (confirm('Are you sure you want to clear all your favorite names?')) {
+                localStorage.removeItem('businessNameFavorites');
+                displayFavorites();
+            }
+        }
+        
+        // Export favorites to a text file
+        function exportFavorites() {
+            const favorites = JSON.parse(localStorage.getItem('businessNameFavorites')) || [];
+            
+            if (favorites.length === 0) {
+                alert('No favorites to export!');
+                return;
+            }
+            
+            const textToExport = favorites.join('\n');
+            const blob = new Blob([textToExport], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'my-favorite-business-names.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
+        // Initialize the application
+        function init() {
+            populateDropdowns();
+            displayFavorites();
+            
+            generateBtn.addEventListener('click', generateNames);
+            saveAllBtn.addEventListener('click', saveAllNames);
+            copyAllBtn.addEventListener('click', copyAllNames);
+            clearFavoritesBtn.addEventListener('click', clearFavorites);
+            exportFavoritesBtn.addEventListener('click', exportFavorites);
+            
+            // Generate some names on initial load
+            generateNames();
+        }
+        
+        // Start the application
+        init();
+    </script>
+</body>
+</html>
