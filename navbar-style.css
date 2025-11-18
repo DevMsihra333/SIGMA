@@ -1,0 +1,197 @@
+/* navbar-styles.css */
+
+/* Global Color Variables - These control the entire color scheme */
+:root {
+    /* Default color scheme */
+    --primary: #ff6b6b;
+    --secondary: #4ecdc4;
+    --accent: #ffd166;
+    --background: #f7f7f7;
+    --text: #2b2d42;
+    --text-light: #f7f7f7;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Pastel color scheme */
+[data-theme="pastel"] {
+    --primary: #a5dee5;
+    --secondary: #ffc0c0;
+    --accent: #d8d2f0;
+    --background: #fafafa;
+    --text: #6d6d6d;
+    --text-light: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.05);
+}
+
+/* Dark color scheme */
+[data-theme="dark"] {
+    --primary: #5e60ce;
+    --secondary: #6930c3;
+    --accent: #80ffdb;
+    --background: #1e1e2e;
+    --text: #f8f8f2;
+    --text-light: #f8f8f2;
+    --shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* Vibrant color scheme */
+[data-theme="vibrant"] {
+    --primary: #ff0055;
+    --secondary: #00d4ff;
+    --accent: #ffde00;
+    --background: #ffffff;
+    --text: #000000;
+    --text-light: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.2);
+}
+
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Navbar styles */
+.navbar {
+    background: linear-gradient(90deg, 
+        var(--primary) 0%, 
+        var(--secondary) 35%, 
+        var(--accent) 100%);
+    box-shadow: 0 2px 10px var(--shadow);
+    padding: 0.5rem 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-logo a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1.8rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-logo a:hover {
+    color: var(--text-light);
+    opacity: 0.9;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile menu (hamburger) */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    margin: 3px 0;
+    background-color: var(--text-light);
+    transition: 0.3s;
+}
+
+/* Main content */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.color-controls {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.color-controls h2 {
+    margin-bottom: 1rem;
+}
+
+.color-controls button {
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    background: var(--primary);
+    color: var(--text-light);
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.color-controls button:hover {
+    opacity: 0.9;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: linear-gradient(180deg, 
+            var(--primary) 0%, 
+            var(--secondary) 100%);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 15px var(--shadow);
+        padding: 1rem 0;
+        gap: 0;
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .nav-item {
+        margin: 1rem 0;
+    }
+}
