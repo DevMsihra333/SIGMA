@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delightful Card - Pure HTML/CSS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .delightful-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px -15px rgba(142, 68, 173, 0.2);
+            overflow: hidden;
+            max-width: 350px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .delightful-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px -15px rgba(142, 68, 173, 0.3);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .delightful-card:hover .card-image {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 24px;
+        }
+
+        .card-title {
+            color: #2d1b3d;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #8e44ad, #3498db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-description {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .short-description {
+            display: block;
+        }
+
+        .full-description {
+            display: none;
+            margin-top: 10px;
+        }
+
+        /* Hidden checkbox for toggle functionality */
+        .read-more-checkbox {
+            display: none;
+        }
+
+        .read-more-btn {
+            background: linear-gradient(135deg, #8e44ad, #3498db);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .read-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(142, 68, 173, 0.3);
+        }
+
+        .read-more-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .read-more-btn:hover::before {
+            left: 100%;
+        }
+
+        /* CSS-only toggle functionality */
+        .read-more-checkbox:checked ~ .card-description .short-description {
+            display: none;
+        }
+
+        .read-more-checkbox:checked ~ .card-description .full-description {
+            display: block;
+        }
+
+        .read-more-checkbox:checked ~ .read-more-btn::after {
+            content: "Show Less";
+        }
+
+        .read-more-btn::after {
+            content: "Read More";
+        }
+
+        /* Additional delightful animations */
+        @keyframes shimmer {
+            0% { background-position: -200px 0; }
+            100% { background-position: 200px 0; }
+        }
+
+        .card-title {
+            background-size: 200px 100%;
+            animation: shimmer 3s infinite linear;
+        }
+
+        /* Responsive design */
+        @media (max-width: 480px) {
+            .delightful-card {
+                max-width: 100%;
+                margin: 10px;
+            }
+            
+            .card-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="delightful-card">
+        <img src="audience-1866738_1280.jpg" 
+             alt="Stadium Magic" 
+             class="card-image">
+        
+        <div class="card-content">
+            <h3 class="card-title">Stadium Magic</h3>
+            
+            <input type="checkbox" id="read-more" class="read-more-checkbox">
+            
+            <div class="card-description">
+                <span class="short-description">Packed stadium under bright lights</span>
+                <span class="full-description">Experience the electric atmosphere of this magnificent stadium filled with passionate fans under the brilliant stadium lights. The energy is palpable as thousands come together to witness sporting excellence and create unforgettable memories.</span>
+            </div>
+            
+            <label for="read-more" class="read-more-btn"></label>
+        </div>
+    </div>
+</body>
+</html>
